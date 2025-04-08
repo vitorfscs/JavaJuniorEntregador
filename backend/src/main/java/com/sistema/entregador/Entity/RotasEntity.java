@@ -34,6 +34,7 @@ public class RotasEntity {
 
     private String pontofim;
 
+    private String checkpoints;
 @OneToMany
 @JoinColumn(name = "entregador_id") // vai criar uma FK na tabela de Rotas
 private List<RotasEntity> rotas;

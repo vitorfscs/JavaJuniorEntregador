@@ -12,12 +12,12 @@ import java.io.InputStream;
 @Configuration
 public class firebaseconf {
 
-    @PostConstruct
+    @PostConstruct // Chamando a inicialização de been para injeção de dependencia 
     public void inicializar() throws IOException {
-        InputStream serviceAccount = getClass().getClassLoader().getResourceAsStream("firebase-config.json");
+        InputStream serviceAccount = getClass().getClassLoader().getResourceAsStream("firebase-config.json"); 
 
-        FirebaseOptions options = FirebaseOptions.builder()
-                .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+        FirebaseOptions options = FirebaseOptions.builder() // Configuração do spring boot com construtor 
+                .setCredentials(GoogleCredentials.fromStream(serviceAccount)) 
                 .setDatabaseUrl("https://sistema-entregador-default-rtdb.firebaseio.com")
                 .build();
 

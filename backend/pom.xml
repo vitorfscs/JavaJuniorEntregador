@@ -39,6 +39,15 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
+		<dependencies>
+		<!-- Dependência do Thymeleaf -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		<!-- Outras dependências... -->
+	</dependencies>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>

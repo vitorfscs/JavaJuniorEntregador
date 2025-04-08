@@ -2,35 +2,60 @@ package com.sistema.entregador.Controller;
 
 import com.sistema.entregador.DTO.EntregadorDto;
 import com.sistema.entregador.Service.EntregadorService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/api/entregadores") // Baseadp em localhost:8080/api/entregadores
+@Controller
+@RequestMapping("/api/entregadores") 
+@RequiredArgsConstructor // Lombok vai gerar automaticamente o construtor com a injeção de dependência
 public class EntregadorController {
 
-    @Autowired // injeção automatica de dependencias e atributos 
-    private EntregadorService entregadorService; // Chamando o service 
+    private final EntregadorService entregadorService; // A dependência do service é injetada automaticamente
 
-    @GetMapping // Endpoint listagem
-    public List<EntregadorDto> listar() { 
-        return entregadorService.listarTodos(); // Mostrando todos os entregadores em listas
+    // Endpoint para listar todos os entregadores
+    @GetMapping("/listagem")
+    public String listar(Model model) {
+        // Obtendo a lista de entregadores do serviço
+        List<EntregadorDto> entregadores = entregadorService.listarTodos();
+        // Adicionando a lista ao modelo para ser acessada no Thymeleaf
+        model.addAttribute("entregadores", entregadores);
+        // Retorna o nome da página HTML (listagem.html) para ser renderizada
+        return "listagem";
     }
 
-    @PostMapping //Endpoint Salvar 
-    public EntregadorDto salvar(@RequestBody EntregadorDto dto) { // Vai pegar a solicitação do form HTTP e enviar para o DTO tratar os dados 
-        return entregadorService.salvar(dto); // salvar no banco
+    // Endpoint para exibir detalhes de um entregador específico
+    @GetMapping("/{id}")
+    public String exibirDetalhes(@PathVariable Long id, Model model) {
+        // Buscando o entregador pelo ID
+        EntregadorDto entregador = entregadorService.buscarPorId(id);
+        // Adicionando o entregador ao modelo
+        model.addAttribute("entregador", entregador);
+        // Retorna o nome da página para exibir os detalhes (detalhes.html)
+        return "detalhes";
     }
 
-    @GetMapping("/{id}") // endpoint id
-    public EntregadorDto buscarPorId(@PathVariable Long id) {
-        return entregadorService.buscarPorId(id); // Buscar por id
+    // Endpoint para adicionar um novo entregador
+    @GetMapping("/novo")
+    public String novaPagina(Model model) {
+        model.addAttribute("entregador", new EntregadorDto()); // Passando um objeto vazio para o formulário
+        return "novo"; // A página HTML para o formulário
     }
 
-    @DeleteMapping("/{id}") // Endpoint deletar 
-    public void deletar(@PathVariable Long id) {
-        entregadorService.deletar(id); // deletar
+    // Endpoint para salvar um entregador
+    @PostMapping("/salvar")
+    public String salvar(@ModelAttribute EntregadorDto entregadorDto) {
+        entregadorService.salvar(entregadorDto);
+        return "redirect:/entregadores/listagem"; // Redireciona para a página de listagem
+    }
+
+    // Endpoint para deletar um entregador
+    @DeleteMapping("/{id}")
+    public String deletar(@PathVariable Long id) {
+        entregadorService.deletar(id);
+        return "redirect:/entregadores/listagem"; // Redireciona após deletar
     }
 }
