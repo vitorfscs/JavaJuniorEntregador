@@ -1,20 +1,52 @@
-# JavaJuniorEntregador
+# 🚚 JavaJuniorEntregador
 
-Projeto desenvolvido para gerenciar serviços de entrega utilizando Java com Spring Boot, Lombok e jQuery.
+Sistema de entregas simples e funcional com listagem de entregadores, criação de rotas e visualização geográfica usando **Java + Spring Boot**, **Lombok**, **Firebase**, **jQuery** e **OpenStreetMap**.
 
-## 📁 Estrutura de Pastas
+---
 
-- `backend`: Código-fonte da aplicação backend com Spring Boot.
-- `.vscode`: Configurações do editor Visual Studio Code.
-- `PRINTS`: Imagens e capturas de tela do projeto.
+## 🧾 Sobre a Aplicação
 
-## 🚀 Tecnologias Utilizadas
+O **JavaJuniorEntregador** é um sistema de gestão de entregas desenvolvido como projeto prático para aplicar conhecimentos em backend e frontend. Ele permite:
 
-- **Spring Boot**: Escolhi essa tecnologia porque tenho afinidade. Fiz um bootcamp há 6 meses e, desde então, venho me aperfeiçoando constantemente.
-- **Lombok**: Utilizado para reduzir a verbosidade no código Java, evitando a necessidade de escrever manualmente getters, setters, construtores, etc.
-- **jQuery**: Apesar de ter recebido ajuda para algumas partes, o JavaScript foi a primeira linguagem que aprendi, o que facilitou bastante a integração com jQuery.
+- 📋 **Cadastro e listagem de entregadores**
+- 🗺️ **Criação de rotas de entrega**
+- 📍 **Visualização de rotas no mapa com integração via OpenStreetMap**
+- 🔄 **Persistência de dados com PostgreSQL e Firebase**
 
-> ⚙️ Para corrigir erros no desenvolvimento, utilizei o ChatGPT 4.0. Tenho experiência no uso dessa ferramenta para resolver problemas rapidamente, mas 70% do código foi escrito por mim manualmente.
+---
+
+## 🧰 Tecnologias Utilizadas
+
+| Tecnologia      | Descrição |
+|-----------------|-----------|
+| **Java + Spring Boot** | Backend robusto e rápido de desenvolver. Tenho afinidade, fiz bootcamp há 6 meses e venho estudando desde então. |
+| **Lombok**       | Simplifica a escrita de classes Java, evitando repetição de código. |
+| **PostgreSQL**   | Banco de dados relacional usado para armazenar entregadores e rotas. |
+| **Firebase**     | Usado para armazenamento em tempo real e integração com frontend. |
+| **jQuery**       | Manipulação rápida do DOM. JavaScript foi minha primeira linguagem, então ficou fácil integrar com jQuery. |
+| **OpenStreetMap API** | Integração para visualização das rotas no mapa. |
+| **ChatGPT 4.0**  | Utilizei para revisar e corrigir pequenos erros, mas 70% do código foi escrito por mim, com domínio total do projeto. |
+
+---
+
+## 📌 Funcionalidades
+
+### ✅ Entregadores
+- Cadastro
+- Edição
+- Listagem
+- Exclusão
+
+### 📦 Rotas de Entrega
+- Criação de nova rota
+- Listagem de todas as rotas criadas
+- Associação de entregadores à rota
+- Visualização em tempo real da rota no mapa
+
+### 🗺️ Mapa (OpenStreetMap)
+- Visualização interativa das rotas
+- Marcadores com pontos de entrega
+- Interface dinâmica com feedback visual
 
 ---
 
@@ -25,24 +57,25 @@ Projeto desenvolvido para gerenciar serviços de entrega utilizando Java com Spr
 ```bash
 git clone https://github.com/vitorfscs/JavaJuniorEntregador.git
 cd JavaJuniorEntregador
-2. Configurar o Banco de Dados PostgreSQL
-Crie um banco chamado Artorias no PostgreSQL.
+2. Configurar o PostgreSQL
+Crie um banco de dados chamado Artorias.
 
-Atualize o arquivo application.properties com seu usuário e senha:
+Atualize application.properties:
 
 properties
 Copiar
 Editar
-# backend/src/main/resources/application.properties
 spring.datasource.url=jdbc:postgresql://localhost:5432/Artorias
 spring.datasource.username=SEU_USUARIO
 spring.datasource.password=SUA_SENHA
 spring.jpa.hibernate.ddl-auto=update
-spring.jpa.show-sql=true
 3. Configurar o Firebase
-Crie um projeto no Firebase Console.
+Acesse: https://console.firebase.google.com/
 
-Gere o arquivo serviceAccountKey.json e coloque dentro de backend/src/main/resources/.
+Crie um projeto.
+
+Baixe o serviceAccountKey.json e coloque em:
+backend/src/main/resources/
 
 No application.properties, adicione:
 
@@ -57,19 +90,28 @@ Editar
 cd backend
 ./mvnw spring-boot:run
 5. Rodar o Frontend
-Abra o arquivo index.html (na raiz do projeto) diretamente no navegador:
+Abra o arquivo index.html no navegador, ou use extensão Live Server no VSCode.
 
-bash
-Copiar
-Editar
-start index.html
-Ou, se preferir, use uma extensão Live Server no VSCode para facilitar o desenvolvimento.
+🧠 Observações
+A API do OpenStreetMap foi integrada manualmente com jQuery para exibir rotas com precisão.
 
-📸 Prints
-A pasta PRINTS/ contém algumas capturas de tela e exemplos visuais da aplicação em funcionamento.
+Utilizei Firebase para sincronização e backup de dados rápidos.
+
+O projeto foi idealizado como sistema de entregas para pequenas e médias empresas, podendo ser expandido com login, autenticação JWT, painel administrativo e mais.
+
+📷 Prints
+Imagens da aplicação em funcionamento estão disponíveis na pasta /PRINTS.
 
 ✍️ Autor
-Vitor F. - Desenvolvedor Backend com conhecimento em QA e entusiasta de tecnologias modernas.
+Vitor F.
+Desenvolvedor Backend com conhecimentos sólidos em Spring Boot e QA.
+Focado em criar soluções reais, escaláveis e eficientes.
 
-🧠 Curiosidade
-Este projeto foi feito com dedicação, misturando aprendizado prático com recursos modernos como o ChatGPT 4.0. Ele me ajudou em partes específicas, mas a lógica e estrutura foram fruto do meu esforço pessoal.
+💬 Agradecimentos
+Obrigado à comunidade que me ajudou, aos conteúdos do bootcamp e também ao ChatGPT 4.0, que foi uma ferramenta de apoio durante o desenvolvimento.
+
+“Aprender nunca é demais. Cada projeto é uma nova escada para o sucesso.”
+
+arduino
+Copiar
+Editar
